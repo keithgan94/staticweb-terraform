@@ -42,6 +42,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Terraform destroy
+        if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
         run: terraform destroy -auto-approve
         working-directory: ./Terraform
         env:
